@@ -3,7 +3,9 @@
 ### Scripts
 
 `dev` : run nodemon to watch for changes (see nodemon.json)
+
 `build`: webpack build with production mode config
+
 `start`: start the server in production mode
 
 ---
