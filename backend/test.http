@@ -1,0 +1,48 @@
+@API_URL = http://localhost:4000/api
+
+###
+GET {{API_URL}}/users
+
+###
+GET {{API_URL}}/users/61c8be0dcd6c2c590095c005
+
+###
+POST {{API_URL}}/users
+Content-Type: application/json
+
+{
+    "username" : "Viktor"
+}
+
+###
+PUT {{API_URL}}/users/61c8be0dcd6c2c590095c005
+Content-Type: application/json
+
+{
+    "username" : "Nairobi"
+}
+
+###
+GET {{API_URL}}/notes
+
+###
+GET {{API_URL}}/notes/61c8b4a3635c211dbe8dc5f8
+
+###
+POST {{API_URL}}/notes
+Content-Type: application/json
+
+{
+    "title" : "new note",
+    "content" : "new content",
+    "author" : "dimitri"
+}
+
+###
+PUT {{API_URL}}/notes/61c9fb83dc84b04286c41f29
+Content-Type: application/json
+
+{
+    "title" : "new note updated!"
+}
+

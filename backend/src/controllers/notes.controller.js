@@ -15,7 +15,6 @@ notesController.createNote = async (req, res) => {
     date,
     author,
   });
-  console.log(newNote);
   await newNote.save();
   res.json({ message: "Note saved!" });
 };
