@@ -1,17 +1,34 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+const baseURL = "http://localhost:4000/api";
+
 export default class CreateUser extends Component {
   state = {
     users: [],
     username: "",
   };
   async componentDidMount() {
-    const res = await axios.get("http://localhost:4000/api/users");
-    this.setState({ users: res.data });
+    this.getUsers();
   }
+  getUsers = async () => {
+    const res = await axios.get(`${baseURL}/users`);
+    this.setState({ users: res.data });
+  };
+  onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post(`${baseURL}/users`, {
+      username: this.state.username,
+    });
+    this.state.username = "";
+    this.getUsers();
+  };
   onChangeUsername = (e) => {
-    this.setState({ username: e.target });
+    this.setState({ username: e.target.value });
+  };
+  deleteUser = async (id) => {
+    await axios.delete(`${baseURL}/users/` + id);
+    this.getUsers();
   };
   render() {
     return (
@@ -19,14 +36,18 @@ export default class CreateUser extends Component {
         <div className="col-md-4">
           <div className="card card-body">
             <h3>Create new user</h3>
-            <form>
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <input
                   type="text"
                   className="form-control"
+                  value={this.state.username}
                   onChange={this.onChangeUsername}
                 ></input>
               </div>
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
             </form>
           </div>
         </div>
@@ -36,6 +57,7 @@ export default class CreateUser extends Component {
               <li
                 className="list-group-item list-group-item-action"
                 key={user._id}
+                onDoubleClick={() => this.deleteUser(user._id)}
               >
                 {user.username}
               </li>
